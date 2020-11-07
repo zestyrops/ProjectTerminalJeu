@@ -23,6 +23,8 @@ class Player(pygame.sprite.Sprite):
         if not self.game.check_collision(self, self.game.all_objects):
             self.rect.x += self.velocity
             self.marche.play()
+        else:
+            self.rect.x -= self.velocity
 
     # Méthode qui permet de faire bouger le joueur a gauche :
     def moveLef(self):
@@ -30,6 +32,8 @@ class Player(pygame.sprite.Sprite):
         if not self.game.check_collision(self, self.game.all_objects):
             self.rect.x -= self.velocity
             self.marche.play()
+        '''else:
+            self.rect.x += self.velocity'''
 
     # Méthode qui permet de faire bouger le joueur en haut :
     def moveUp(self):
@@ -37,6 +41,8 @@ class Player(pygame.sprite.Sprite):
         if not self.game.check_collision(self, self.game.all_objects):
             self.rect.y -= self.velocity
             self.marche.play()
+        else:
+            self.rect.y += self.velocity
 
     # Méthode qui permet de faire bouger le joueur en bas:
     def moveDown(self):
@@ -44,3 +50,19 @@ class Player(pygame.sprite.Sprite):
         if not self.game.check_collision(self, self.game.all_objects):
             self.rect.y += self.velocity
             self.marche.play()
+        else:
+            self.rect.y -= self.velocity
+
+        # Création d'une méthode qui permet d'afficher la barre de vie du joueur :
+    def update_health_bar(self, surface):
+        # Couleur pour jauge de vie (vert) :
+        bar_color = (111, 210, 46)
+        # Couleur pour l'arrière plan de la jauge :
+        back_bar_color = (60, 63, 60)
+        # Position de la jauge de vie ainsi sa largeur et son épesseur :
+        bar_position = [self.rect.x - 20, self.rect.y - 10, self._health, 5]
+        # Position de l'arrière plan de notre jauge de vie :
+        back_bar_position = [self.rect.x - 20, self.rect.y - 10, self._maxHealth, 5]
+        # Création barre de vie :
+        pygame.draw.rect(surface, back_bar_color, back_bar_position)
+        pygame.draw.rect(surface, bar_color, bar_position)
