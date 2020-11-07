@@ -14,6 +14,25 @@ class Monster(pygame.sprite.Sprite):
         self.rect.x = 1000
         self.rect.y = 500
 
+    # Création dégats du monstre :
+    def damage(self, amount):
+        # Infliger les dégats:
+        self.health -= amount
+
+    # Création d'une méthode qui permet d'afficher la barre de vie du monstre :
+    def update_health_bar(self, surface):
+        # Couleur pour jauge de vie (vert) :
+        bar_color = (111, 210, 46)
+        # Couleur pour l'arrière plan de la jauge :
+        back_bar_color = (60, 63, 60)
+        # Position de la jauge de vie ainsi sa largeur et son épesseur :
+        bar_position = [self.rect.x - 20, self.rect.y - 10, self.health, 5]
+        # Position de l'arrière plan de notre jauge de vie :
+        back_bar_position = [self.rect.x - 20, self.rect.y - 10, self.max_health, 5]
+        # Création barre de vie :
+        pygame.draw.rect(surface, back_bar_color, back_bar_position)
+        pygame.draw.rect(surface, bar_color, bar_position)
+
     # Création d'une méthode pour faire avancer le joueur :
     def foward(self):
         self.rect.x -= self.velocity
